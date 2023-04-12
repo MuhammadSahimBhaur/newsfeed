@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import { Outlet, Link } from "react-router-dom";
+
 
 function App() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+      const data = await response.json();
+      const titles = data.map((post) => post.title);
+      const newPosts = titles.map((title, index) => <li> {title} <button><Link to={"/post/" + (index+1).toString()}>Go to post!{index+1}</Link> </button> </li>);
+      setPosts(newPosts);
+    }
+
+    fetchPosts();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Link to="/Random">Let's try something new!</Link>
+    <h1>Posts</h1>
+    <ol>
+      {posts}
+    </ol>
+    </>
   );
 }
 
