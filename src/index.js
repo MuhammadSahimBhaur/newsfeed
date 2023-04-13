@@ -1,11 +1,11 @@
-import React, { Children } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 // import { createRoot } from "react-dom/client";
 // import { BrowserRouter } from "react-router-dom";
 import {
   createBrowserRouter,
-  createRoutesFromElements,
-  Route,
+  // createRoutesFromElements,
+  // Route,
   RouterProvider,
 } from "react-router-dom";
 import App from './App';
@@ -17,32 +17,38 @@ import { Child } from './Child';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
-},
-{
-  path: "/Random",
-  element: <Random/>,
-},
-{
-  path: "/Random2",
-  element: <Random2/>,
-  children:[
-    {
-      path:"Child",
-      element:<Child/>
-    }
-  ]
-},
-{
-  path:"post/:id",
-  element: <Post />
-}
+    element: <App />,
+    children: [
+      {
+        path: "post/:id",
+        element: <Post />
+      }
+    ]
+  },
+  {
+    path: "/Random",
+    element: <Random />,
+  },
+  {
+    path: "/Random2",
+    element: <Random2 />,
+    children: [
+      {
+        path: "Child",
+        element: <Child />
+      }
+    ]
+  },
+  // {
+  //   path: "post/:id",
+  //   element: <Post />
+  // }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-    <RouterProvider router={router} />
+  <RouterProvider router={router} />
   // </React.StrictMode>
 );
 
