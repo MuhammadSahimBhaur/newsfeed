@@ -1,7 +1,7 @@
 import React, { Children } from 'react';
 import ReactDOM from 'react-dom/client';
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+// import { createRoot } from "react-dom/client";
+// import { BrowserRouter } from "react-router-dom";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -11,6 +11,8 @@ import {
 import App from './App';
 import Post from './Post';
 import { Random } from './Random';
+import { Random2 } from './Random2';
+import { Child } from './Child';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,16 @@ const router = createBrowserRouter([
 {
   path: "/Random",
   element: <Random/>,
+},
+{
+  path: "/Random2",
+  element: <Random2/>,
+  children:[
+    {
+      path:"Child",
+      element:<Child/>
+    }
+  ]
 },
 {
   path:"post/:id",

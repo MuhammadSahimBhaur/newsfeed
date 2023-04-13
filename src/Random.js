@@ -1,7 +1,8 @@
 import React from 'react'
+import {Link} from "react-router-dom"
 
 export const Random = () => {
   return (
-    <div>Random</div>
+    <Link to="/Random2">Go to random two!</Link>
   )
 }
