@@ -1,21 +1,8 @@
-import { useState, useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLoaderData } from "react-router-dom";
 
 
 function App() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    async function fetchPosts() {
-      const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-      const data = await response.json();
-      const titles = data.map((post) => post.title);
-      const newPosts = titles.map((title, index) => <li> {title} <button><Link to={"post/" + (index + 1).toString()}>Go to post! {index + 1}</Link> </button> </li>);
-      setPosts(newPosts);
-    }
-
-    fetchPosts();
-  }, []);
+  const newPosts = useLoaderData()
 
   return (
     <div style={{ display: "flex" }}>
@@ -24,7 +11,7 @@ function App() {
 
         <h1>Posts</h1>
         <ol>
-          {posts}
+          {newPosts}
         </ol>
       </div>
       <div>

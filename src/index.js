@@ -13,11 +13,14 @@ import Post from './Post';
 import { Random } from './Random';
 import { Random2 } from './Random2';
 import { Child } from './Child';
+import { Child2 } from './Child2';
+import { loadPosts } from './Loader';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader: loadPosts,
     children: [
       {
         path: "post/:id",
@@ -36,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "Child",
         element: <Child />
+      },
+      {
+        path: "Child2",
+        element: <Child2 />
       }
     ]
   },
